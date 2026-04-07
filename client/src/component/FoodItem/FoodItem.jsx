@@ -14,7 +14,7 @@ function FoodItem({ id, name, price, description, image }) {
         {!cartItems[id] ? (
           <img
             className="add"
-            onClick={() => addToCart(id, name)}
+            onClick={() => addToCart(name)}
             src={assets.add_icon_white}
             alt="add item"
           />
@@ -27,7 +27,7 @@ function FoodItem({ id, name, price, description, image }) {
             />
             <p>{cartItems[id]}</p>
             <img
-              onClick={() => addToCart(id, name)}
+              onClick={() => addToCart(name)}
               src={assets.add_icon_green}
               alt="add"
             />
