@@ -26,7 +26,28 @@ function PlaceOrder() {
     return total;
   };
 
+  // const loadRazorpay = () => {
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+  //     document.body.appendChild(script);
+  //   });
+  // };
+
   const handlePayment = async () => {
+    // const isLoaded = await loadRazorpay();
+
+    // if (!isLoaded) {
+    //   toast.error("Razorpay SDK failed to load");
+    //   return;
+    // }
+
     try {
       const items = food_list
         .filter((food) => cartItems[food._id] > 0)
@@ -37,7 +58,7 @@ function PlaceOrder() {
           price: food.price,
         }));
 
-      const totalAmount = getTotalAmount() + 2;
+      const totalAmount = getTotalAmount() + 50;
 
       const res = await API.post("/orders/create", {
         items,
@@ -52,7 +73,7 @@ function PlaceOrder() {
         amount: order.amount,
         currency: "INR",
         name: "FoodDeli",
-        description: "Food Order Payment",
+        description: "Foo Order Payment",
         order_id: order.id,
 
         method: {
@@ -112,7 +133,7 @@ function PlaceOrder() {
         <p>Total Amount: ₹{getTotalAmount()}</p>
         <p>Delivery Fee: ₹50</p>
 
-        <h3>Total: ₹{getTotalAmount() + 2}</h3>
+        <h3>Total: ₹{getTotalAmount() + 50}</h3>
 
         <button onClick={handlePayment}>PAY WITH RAZORPAY</button>
       </div>

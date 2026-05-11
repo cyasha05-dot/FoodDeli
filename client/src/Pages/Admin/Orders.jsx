@@ -12,6 +12,7 @@ function Orders() {
       setOrders(res.data);
     } catch (err) {
       toast.error("Failed to load orders");
+      console.log("Orders.jsx error", err);
     }
   };
 
@@ -25,7 +26,10 @@ function Orders() {
       toast.success("Order updated");
       fetchOrders();
     } catch (err) {
-      toast.error("Status update failed");
+      const message = err.response?.data?.message || "Status update failed";
+
+      toast.error(message);
+      console.log("Update Status error", err);
     }
   };
 
